@@ -1,5 +1,4 @@
 const wheel = document.getElementById("wheel");
-
 const spinBtn = document.getElementById("spin-btn");
 const finalValue = document.getElementById("final-value");
 const black = document.getElementById("black");
@@ -59,7 +58,8 @@ const valueGenerator = (angleValue) => {
         if (angleValue >= i.minDegree && angleValue <= i.maxDegree) {
             spinBtn.innerHTML = i.value;
             finalValue.innerHTML = i.value;
-
+            var event = new CustomEvent('spinCompleted', { detail: i.value });
+            document.dispatchEvent(event);
             spinBtn.disabled = false;
             break;
         }

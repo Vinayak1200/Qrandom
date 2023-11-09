@@ -47,6 +47,42 @@ tr {
     color: #8EB891;
 }
 
+.control-1 {
+    position: absolute;
+    left: 96.25;
+    top: 46;
+}
+
+.control-2 {
+    position: absolute;
+    left: 95.52;
+    top: 46;
+}
+
+.control-3 {
+    position: absolute;
+    left: 95.7;
+    top: 46;
+}
+
+.control-4 {
+    position: absolute;
+    left: 96.8;
+    top: 46;
+}
+
+.control-4 {
+    position: absolute;
+    left: 95.7;
+    top: 46;
+}
+
+.control-4 {
+    position: absolute;
+    left: 97.17;
+    top: 46;
+}
+
 .roulette .sector .vt {
     font-size: 15px;
 }

@@ -8,8 +8,9 @@ const purple = document.getElementById("black");
 
 var angle_diff = 10;
 var angle = 0;
-var i = 0
-const rotationValues = []
+var i = 0;
+const rotationValues = [];
+
 while (angle <= 360) {
     rotationValues.push({ minDegree: angle, maxDegree: angle + angle_diff, value: i });
     angle += angle_diff;
@@ -26,8 +27,9 @@ for (let i = 0; i < 36; i++) {
     else pieColors.push("#000000")
 }
 
+
 let myChart = new Chart(wheel, {
-    type: "pie",
+    type: "doughnut",
     data: {
         datasets: [{
             backgroundColor: pieColors,
@@ -39,19 +41,26 @@ let myChart = new Chart(wheel, {
         }],
     },
     options: {
+        cutoutPercentage: 70,
         responsive: true,
-        animation: { duration: 0 },
+        animation: { duration: 1000, easing: 'linear' },
         plugins: {
-            datalabels: {
-                display: true,
+            datalabels: [{
+                display: function(context) {
+                    return true;
+                },
+                color: 'white',
+                font: {
+                    size: 12,
+                },
                 formatter: (value, context) => {
                     return dataLabels[context.dataIndex];
                 },
-                color: 'white',
-            }
+            }, ]
         }
     }
 });
+
 
 const valueGenerator = (angleValue) => {
     for (let i of rotationValues) {
@@ -66,14 +75,25 @@ const valueGenerator = (angleValue) => {
     }
 };
 
+async function Random(url) {
+    response = await fetch(url);
+    var data = await response.json();
+    console.log(data);
+    return data['number'];
+}
+
+
 
 
 spinBtn.addEventListener("click", () => {
     spinBtn.disabled = true;
     finalValue.innerHTML = '<p>spinning...</p>';
-    let randomIndex = Math.floor(Math.random() * rotationValues.length);
+    let randomNumber;
+    randomNumber = await Random('http://localhost:3000/api/numbers')
+    console.log(randomNumber);
+    let randomIndex = Math.floor(randomNumber * rotationValues.length);
+    console.log(randomIndex);
     let randomStartDegree = rotationValues[randomIndex].minDegree;
-    let selectedValue = rotationValues.find(value => value.minDegree === randomStartDegree).value;
     let rotationInterval = window.setInterval(() => {
         myChart.options.rotation = myChart.options.rotation + 5;
         myChart.update();

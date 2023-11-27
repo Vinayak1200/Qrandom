@@ -27,6 +27,7 @@
 
 #spin-btn {
     position: absolute;
+    background-image: 'assets/roulette_3.png';
     transform: translate(-50%, -50%);
     top: 45%;
     left: 50%;
